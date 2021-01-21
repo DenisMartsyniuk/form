@@ -1,0 +1,52 @@
+@import "assets/styles/colors.module.scss";
+
+.wrapperInput {
+  width: 256px;
+  height: 76px;
+  position: relative;
+}
+
+.input {
+  width: 228px;
+  height: 40px;
+  outline: none;
+  font-size: 14px;
+  line-height: 20px;
+  color: $main-black;
+  border-radius: 12px;
+  letter-spacing: 0.18px;
+  padding: 0 44px 0 16px;
+  border: solid 1px $mystic;
+
+  &::placeholder {
+    font-size: 14px;
+    line-height: 20px;
+    color: $grey;
+    letter-spacing: 0.18px;
+    font-family: "IBMPlexSans";
+  }
+}
+
+.usedInput {
+  border: solid 1px $main-black;
+}
+
+.error {
+  border: solid 1px $red;
+}
+
+.errorText {
+  color: $red;
+  font-size: 10px;
+  padding: 4px 16px;
+  line-height: 16px;
+  letter-spacing: 0.13px;
+  font-family: "IBMPlexSans";
+}
+
+.icon {
+  top: 12px;
+  right: -12px;
+  cursor: pointer;
+  position: absolute;
+}

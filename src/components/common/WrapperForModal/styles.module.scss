@@ -1,0 +1,30 @@
+@import "assets/styles/colors.module.scss";
+
+.wrapper {
+  display: flex;
+  width: 650px;
+  height: 600px;
+  border-radius: 12px;
+  flex-direction: column;
+  background-color: $white;
+}
+
+.wrapperHeader {
+  display: flex;
+  min-height: 30px;
+  align-items: center;
+  margin-bottom: 25px;
+  padding: 32px 24px 32px 40px;
+  justify-content: space-between;
+  border-bottom: 1px solid $main-black;
+}
+
+.closeIcon {
+  cursor: pointer;
+}
+
+.wrapperChildren {
+  height: 380px;
+  overflow: auto;
+  padding: 0 8px 8px;
+}
