@@ -1,4 +1,4 @@
-import { Formik } from "formik";
+import { useFormik } from "formik";
 import Select from "react-select";
 
 import { signIn } from "bus/SignIn/shapes";
@@ -18,73 +18,65 @@ const options = [
 function SignIn() {
   const { handleSignIn } = useSignIn();
 
+  const formik = useFormik({
+    initialValues: signIn.shape,
+    validationSchema: signIn.schema,
+    onSubmit: (values) => handleSignIn(values),
+  });
+
   return (
     <SignInWrapper>
       <div className={styles.wrapper}>
         <h1 className={styles.title}>Sign In</h1>
 
-        <Formik
-          initialValues={signIn.shape}
-          validationSchema={signIn.schema}
-          onSubmit={(values) => handleSignIn(values)}
-        >
-          {({
-            values,
-            errors,
-            touched,
-            handleBlur,
-            handleSubmit,
-            handleChange,
-            setFieldValue,
-          }) => (
-            <form onSubmit={handleSubmit}>
-              <div className={styles.wrapperInput}>
-                <Input
-                  name="username"
-                  onBlur={handleBlur}
-                  placeholder="Username"
-                  error={errors.username}
-                  value={values.username}
-                  onChange={handleChange}
-                  touched={touched.username}
-                />
-              </div>
+        <form onSubmit={formik.handleSubmit}>
+          <div className={styles.wrapperInput}>
+            <Input
+              name="username"
+              onBlur={formik.handleBlur}
+              placeholder="Username"
+              error={formik.errors.username}
+              value={formik.values.username}
+              onChange={formik.handleChange}
+              touched={formik.touched.username}
+            />
+          </div>
 
-              <PasswordInput
-                name="password"
-                onBlur={handleBlur}
-                placeholder="Password"
-                error={errors.password}
-                value={values.password}
-                onChange={(e) => setFieldValue("password", e.target.value)}
-                touched={touched.password}
-              />
+          <PasswordInput
+            name="password"
+            onBlur={formik.handleBlur}
+            placeholder="Password"
+            error={formik.errors.password}
+            value={formik.values.password}
+            touched={formik.touched.password}
+            onChange={(e) => formik.setFieldValue("password", e.target.value)}
+          />
 
-              <div className={styles.wrapperRules}>
-                Do you agree?
-                <input
-                  name="rules"
-                  type="checkbox"
-                  value={values.rules}
-                  onChange={handleChange}
-                />
-              </div>
+          <div className={styles.wrapperRules}>
+            Do you agree?
+            <input
+              name="rules"
+              type="checkbox"
+              value={formik.values.rules}
+              onChange={formik.handleChange}
+            />
+          </div>
 
-              <div className={styles.wrapperSelect}>
-                <Select
-                  name="role"
-                  options={options}
-                  onChange={(option) => setFieldValue("role", option.value)}
-                  value={options.find((option) => option.value === values.role)}
-                />
-              </div>
+          <div className={styles.wrapperSelect}>
+            <Select
+              name="role"
+              options={options}
+              onChange={(option) => formik.setFieldValue("role", option.value)}
+              value={options.find(
+                (option) => option.value === formik.values.role
+              )}
+            />
+          </div>
 
-              <div className={styles.wrapperBtn}>
-                <Button title="Sign In" type="submit" />
-              </div>
-            </form>
-          )}
-        </Formik>
+          <div className={styles.wrapperBtn}>
+            <Button title="Sign In" type="submit" />
+          </div>
+        </form>
       </div>
     </SignInWrapper>
   );
