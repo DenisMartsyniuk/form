@@ -1,28 +1,22 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useContext, useEffect } from "react";
 
-import { uiActions } from "bus/ui/actions";
-import TestModal from "containers/TestModal";
-import Button from "components/common/Button";
-import { selectOpenModal } from "bus/ui/selectors";
-
-import styles from "./styles.module.scss";
+import { ProductsContext } from "bus/Dashboard/context/productsContext";
 
 const Dashboard = () => {
-  const dispatch = useDispatch();
-  const openModal = useSelector(selectOpenModal);
+  const { getProducts, productsData } = useContext(ProductsContext);
 
-  console.log(openModal);
+  useEffect(() => {
+    getProducts();
+  }, []);
 
   return (
     <div>
-      Dashboard
-      <div className={styles.wrapperBtn}>
-        <Button
-          title="Open Modal"
-          onClick={() => dispatch(uiActions.modal.open())}
-        />
+      <div>Dashboard</div>
+      <div>
+        {productsData.map((item) => (
+          <p key={item.id}>{item.name}</p>
+        ))}
       </div>
-      {openModal && <TestModal />}
     </div>
   );
 };

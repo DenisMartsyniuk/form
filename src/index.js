@@ -1,20 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
-import { BrowserRouter as Router } from "react-router-dom";
 
-import App from "navigation/App";
-import { store } from "core/store";
-
-import "assets/styles/global.module.scss";
+import Dashboard from "containers/Dashboard";
+import { ProductsState } from "bus/Dashboard/context/productsState";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <Router>
-        <App />
-      </Router>
-    </Provider>
+    <ProductsState>
+      <Dashboard />
+    </ProductsState>
   </React.StrictMode>,
   document.getElementById("root")
 );
