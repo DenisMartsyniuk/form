@@ -17,7 +17,7 @@ export const ProductsState = ({ children }) => {
 
       const data = await responce.json();
 
-      setProductsData(data.items);
+      setProductsData(null);
     } catch (e) {
       console.log(e);
     }

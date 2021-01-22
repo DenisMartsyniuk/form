@@ -13,7 +13,7 @@ const Dashboard = () => {
     <div>
       <div>Dashboard</div>
       <div>
-        {productsData.map((item) => (
+        {productsData?.map((item) => (
           <p key={item.id}>{item.name}</p>
         ))}
       </div>
