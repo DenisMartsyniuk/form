@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react";
 
+import { API } from "constant/api";
 import { ProductsContext } from "bus/Dashboard/context/productsContext";
 
 export const ProductsState = ({ children }) => {
@@ -7,9 +8,7 @@ export const ProductsState = ({ children }) => {
 
   const getProducts = useCallback(async () => {
     try {
-      const responce = await fetch(
-        "https://yalantis-react-school-api.yalantis.com/api/v1/products"
-      );
+      const responce = await fetch(API.PRODUCTS);
 
       if (responce.status !== 200) {
         throw new Error(responce.status);
